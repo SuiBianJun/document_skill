@@ -1,8 +1,8 @@
 1、docker与vm 虚拟机的比较
 
-![](/home/fhlufwj/typora_workspace/docker/pic/docker_vm.png)
+![](./pic/docker_vm.png)
 
-![](/home/fhlufwj/typora_workspace/docker/pic/docker_vm2.png)
+![](./pic/docker_vm2.png)
 
 ２、docker常用命令
 

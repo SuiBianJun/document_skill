@@ -57,3 +57,72 @@ docker run -it xxImage  # 交互式运行容器
 `docker attach containerID` 重新进入到正在运行容器中
 
 `docker cp containerID:/XX/YY路径　宿主机路径`　拷贝容器中的文件到宿主机
+
+3、docker 镜像原理
+
+docker镜像是只读的
+
+docker 是一个联合文件系统（UnionFS）,实际上是一层层的文件系统，但是从外面看只有一个文件系统。
+
+bootfs: boot加载器和kernel，不同的发行版系统可以使用相同的bootfs
+
+rootfs: 不同发行版系统的文件系统，包括/dev,/root,/etc等
+
+分层的结构可以共享资源，不同的镜像可以共用都使用到的分层文件，并且在内存中只加载一份。
+
+镜像制作：`docker commit -m="信息"　-a="作者"　容器ID　目标镜像名:XXTag` 
+
+
+
+4、docker 容器数据卷和数据卷容器
+
+容器中运行的数据持久化，容器之间共享数据，主机与容器之间的数据传递
+
+容器内添加数据卷：
+
+- `docker run -it -v 宿主机目录:容器目录　容器名`
+
+- DockerFile中添加
+
+  １、编写dockerfile文件
+
+  ```dockerfile
+  FROM centos
+  # 添加的目录是容器内的数据卷路径，宿主机的路径自动生成
+  VOLUME ["/data/cd1", "/data/cd2"]
+  CMD echo "--add volume finished--"
+  CMD /bin/bash
+  ```
+
+  ２、生成镜像，运行容器
+
+  ```shell
+  docker build xxDockerFile
+  docker build -t xxName:Tag .
+  ```
+
+  3、查看宿主机的卷路径
+
+  ```shell
+  docker inspect containerID　
+  ```
+
+  
+
+附加数据卷操作权限：`docker run -it -v 宿主机目录:容器目录:文件夹操作权限　容器名`　
+
+文件夹操作权限：ro ＝read only
+
+查看容器信息：`docker inspect containerID`
+
+**不论容器是否运行或者停止，对数据卷的修改都能同步**
+
+> 已运行的容器还能添加容器数据卷吗？
+
+容器数据卷：从其他容器继承数据卷，不同容器之间共用相同的数据卷。只要有容器在使用，数据卷就一直有效
+
+`docker run -it --volumes-form xxContainerID/xxContainerName xxImage`
+
+
+
+4、DockerFile文件编写

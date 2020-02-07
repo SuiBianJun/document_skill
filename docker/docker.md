@@ -6,6 +6,15 @@
 
 ２、docker常用命令
 
+`docker安装`：
+
+- centos7
+  1. yum install -y yum-utils
+  2. yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  3. yum install -y docker-ce
+  4. systemctl start docker
+  5. 添加aliyun镜像服务加速器
+
 帮助命令：
 
 `docker version`　`docker info`　`docker --help`

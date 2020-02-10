@@ -48,3 +48,25 @@ print("avg score = " + str(avg_score)) # 2.5
 ```
 
 1.3 保留最后N个元素
+
+使用队列存储
+
+1.4 获取最大或最小的N个元素
+
+heapq 库函数
+
+1.5 一个键映射多个键值的字典
+
+多个键值就需要考虑键值的存储形式：列表，集合等
+
+```python
+from collections import defaultdict
+d = {}
+d.setdefault('a', []).append(1)
+d.setdefault('a', []).append(2)
+print(d)
+d2 = {}
+d2.setdefault('b', set()).add(1)
+d2.setdefault('b', set()).add(2)
+print(d2)
+```

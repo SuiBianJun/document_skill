@@ -70,3 +70,16 @@ d2.setdefault('b', set()).add(1)
 d2.setdefault('b', set()).add(2)
 print(d2)
 ```
+
+
+
+1.6 字典中的数据计算
+
+```python
+dic = {    'a': 1,    'b': 3,    'c': 4,    'd': 2,    'e': 0}
+print(min(dic.values())) # 只有值
+print(min(dic, key=lambda s : dic[s])) # 只有键
+rint(min(zip(dic.values(), dic.keys()))) # 获取键值最小的字典元素
+```
+
+1.7 

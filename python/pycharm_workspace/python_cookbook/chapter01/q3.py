@@ -3,6 +3,11 @@
 # @Author  : dlg
 # @File    : q3.py
 
+"""
+
+    python堆数据结构拓展库
+
+"""
 
 import heapq
 

@@ -3,6 +3,12 @@
 # @Author  : dlg
 # @File    : q4.py
 
+"""
+
+    多键值的字典
+
+"""
+
 from collections import defaultdict
 
 df = defaultdict(list)

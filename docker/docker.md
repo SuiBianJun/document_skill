@@ -244,6 +244,53 @@ CMD /usr/local/apache-tomcat-9.0.30/bin/startup.sh && tail -f /usr/local/apache-
 
 安装mysql容器
 
+- ​	使用现有的官方容器
+
+  ```shell
+  docker pull mysql
+  docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+  
+  -p 3306:3306：将容器的 3306 端口映射到主机的 3306 端口。
+  -v -v $PWD/conf:/etc/mysql/conf.d：将主机当前目录下的 conf/my.cnf 挂载到容器的 /etc/mysql/my.cnf。
+  -v $PWD/logs:/logs：将主机当前目录下的 logs 目录挂载到容器的 /logs。
+  -v $PWD/data:/var/lib/mysql ：将主机当前目录下的data目录挂载到容器的 /var/lib/mysql 。
+  -e MYSQL_ROOT_PASSWORD=123456：初始化 root 用户的密码。
+  mysql> GRANT ALL ON *.* TO 'root'@'%';
+  mysql> flush privileges;
+  mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
+  mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+  mysql> flush privileges;
+  
+  ```
+
+  - 制作镜像
+
+  ```dockerfile
+  # mysql镜像
+  # 功能
+  # 1、正确安装mysql
+  # 	aliyun软件源配置
+  # 	mysql软件源配置
+  # 2、用户名、密码配置
+  FROM centos
+  
+  MAINTAINER DLG<26233
+  
+  RUN cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base_backup.repo
+  RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+  RUN yum makecache
+  
+  ADD ./mysql57-community-release-el7-8.noarch.rpm /home/
+  RUN yum localinstall -y /home/mysql57-community-release-el7-8.noarch.rpm
+  
+  RUN yum install -y mysql-community-server.x86_64
+  
+  ENTRYPOINT ["/bin/bash"]
+  
+  ```
+
+  
+
 安装redis容器
 
 安装nginx容器

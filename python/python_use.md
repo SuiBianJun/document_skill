@@ -17,4 +17,39 @@ def __next__(self):
 
 ```
 
-1.4 元组在同样长度的情况下可以进行大小比较，列表在不同长度也可以大小比较
+4、元组在同样长度的情况下可以进行大小比较，列表在不同长度也可以大小比较
+
+5、（*）会把接收到的参数形成一个元组，而（**）则会把接收到的参数存入一个字典
+
+```python
+def params_test(data, data2):
+    print(str(data) + '==' + str(data2))
+c = [1, 2]
+params_test(*c)
+
+>>> 1==2
+
+def params_test2(**kwargs):
+    print(kwargs)
+params_test2(a=1, b=2)
+>>> {'a': 1, 'b': 2}
+```
+
+
+
+6、命名元组
+
+```python
+from collections import namedtuple
+sub = namedtuple('sub', ['c', 'd'])
+b= sub(1, 2)
+print(b)
+print(b.c)
+
+>>> a(c=1, d=2)
+>>> 1
+
+# b.c = 3 # 原则上命名元组不可修改，但是可以使用_replace方法
+b = b._replace(c=3)
+print(b)
+```

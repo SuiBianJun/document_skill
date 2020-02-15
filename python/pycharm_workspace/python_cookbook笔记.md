@@ -1,3 +1,5 @@
+## chapter01
+
 1.1 解压序列变量并赋值
 
 - 变量的数量必须跟序列元素的数量一样
@@ -82,4 +84,9 @@ print(min(dic, key=lambda s : dic[s])) # 只有键
 rint(min(zip(dic.values(), dic.keys()))) # 获取键值最小的字典元素
 ```
 
-1.7 
+
+
+## chapter02
+
+
+

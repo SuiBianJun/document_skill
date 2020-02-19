@@ -1,10 +1,10 @@
 
 /experiences/
 
-/python/book/
+#/python/book/
 
-/java/book/
+#/java/book/
 
-/mysql/book/
+#/mysql/book/
 
-/linux/book/
+#/linux/book/
